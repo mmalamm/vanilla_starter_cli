@@ -6,6 +6,7 @@ import { exec } from "child_process";
 const cwd = process.cwd();
 
 const dirname = process.argv[2];
+const installer = process.argv[3];
 
 try {
   fs.mkdirSync(dirname);
