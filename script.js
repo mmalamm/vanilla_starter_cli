@@ -36,7 +36,7 @@ const css = `
 html {
   background-color: black;
 }
-`.trimStart();
+`;
 
 const js = `
 console.log("hello world");
@@ -44,7 +44,7 @@ console.log("hello world");
 
 const gitignore = `
 node_modules
-`;
+`.trimStart();
 
 const eslint = `
 {
@@ -77,7 +77,7 @@ const pkg_json = `
   },
   "type": "module"
 }
-`;
+`.trimStart();
 
 const o = {
   "index.html": html,
@@ -100,6 +100,9 @@ const devDependencies = ["eslint", "eslint-plugin-import", "vite", "vitest"];
 const commands = [
   `cd ${projectName}`,
   `${installCmd} ${devDependencies.join(" ")}`,
+  `git init`,
+  `git add .`,
+  `git commit -m 'init commit of ${projectName}'`,
 ];
 
 exec(commands.join(" && "));
