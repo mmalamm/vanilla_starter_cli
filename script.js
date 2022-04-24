@@ -101,8 +101,6 @@ const commands = [
   `cd ${projectName}`,
   `${installCmd} ${devDependencies.join(" ")}`,
   `git init`,
-  `git add .`,
-  `git commit -m 'init commit of ${projectName}'`,
 ];
 
 exec(commands.join(" && "));
