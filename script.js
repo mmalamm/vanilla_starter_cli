@@ -5,25 +5,25 @@ import { exec } from "child_process";
 
 const cwd = process.cwd();
 
-const dirname = process.argv[2];
+const projectName = process.argv[2];
 const installer = process.argv[3];
 
 try {
-  fs.mkdirSync(dirname);
+  fs.mkdirSync(projectName);
 } catch (error) {
   console.log("alredy exist");
   console.log(error);
   process.exit(1);
 }
 
-const html = String.raw`
+const html = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>wc practice</title>
+    <title>${projectName}</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -32,21 +32,21 @@ const html = String.raw`
 </html>
 `.trimStart();
 
-const css = String.raw`
+const css = `
 html {
   background-color: black;
 }
 `.trimStart();
 
-const js = String.raw`
+const js = `
 console.log("hello world");
 `;
 
-const gitignore = String.raw`
+const gitignore = `
 node_modules
 `;
 
-const eslint = String.raw`
+const eslint = `
 {
   "rules": {
     "no-undef": "error",
@@ -69,7 +69,7 @@ const eslint = String.raw`
 }
 `.trimStart();
 
-const pkg_json = String.raw`
+const pkg_json = `
 {
   "scripts": {
     "dev": "vite",
@@ -89,7 +89,7 @@ const o = {
 };
 
 Object.entries(o).forEach(([fileName, dataString]) => {
-  fs.writeFileSync(path.join(cwd, dirname, fileName), dataString);
+  fs.writeFileSync(path.join(cwd, projectName, fileName), dataString);
 });
 
 const installCmd =
@@ -98,7 +98,7 @@ const installCmd =
 const devDependencies = ["eslint", "eslint-plugin-import", "vite", "vitest"];
 
 const commands = [
-  `cd ${dirname}`,
+  `cd ${projectName}`,
   `${installCmd} ${devDependencies.join(" ")}`,
 ];
 
